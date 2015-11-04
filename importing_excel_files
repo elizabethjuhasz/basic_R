@@ -1,0 +1,16 @@
+# if the file is stored on the desktop (MAC)
+~/Desktop
+setwd("/Users/USERNAME/Desktop")
+
+#packages for reading Excel sheets/data
+install.packages("readxl")
+install.packages("gdata")
+
+
+# check to see if R can actually find the file
+file.exists("refugees.xls")
+
+# through readxl
+# library(readxl)
+read_excel("refugees.xls")
+
