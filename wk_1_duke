@@ -4,31 +4,31 @@ library(ggplot2)
 library(statsr)
 ```
 
-***loading data***
+### loading data
 
 ```{r load-abrbuthnot-data}
 data(arbuthnot)
 ```
 
-***viewing data***
+### viewing data
 
 ```{r view-data}
 arbuthnot
 ```
 
-***dimensions of a data frame***
+### dimensions of a data frame
 ```{r dim-data}
 dim(arbuthnot)
 ```
-***print out shows that there are 82 observations for three variables***
+### print out shows that there are 82 observations for three variables
 [1] 82  3 
 
-***names in columns of data***
+### names in columns of data
 ```{r names-data}
 names(arbuthnot)
 ```
 
-*** view values for boys baptized in dataset***
+### view values for boys baptized in dataset
 ```{r view-boys}
 arbuthnot$boys
 ```
@@ -59,3 +59,40 @@ http://docs.ggplot2.org/current/
 ```{r calc-total-bapt-vars}
 arbuthnot$boys + arbuthnot$girls
 ```
+### adding new variable to dataframe 
+```{r calc-total-bapt-vars-save}
+arbuthnot <- arbuthnot %>%
+  mutate(total = boys + girls)
+```
+/// %>% piping operator.  ///
+comes from  library(magrittr)
+
+***line plot with new variable 'total'***
+```{r plot-total-vs-year-line}
+ggplot(data = arbuthnot, aes(x = year, y = total)) +
+  geom_line()
+```
+***layer them if you want both line and scatter plots***
+```{r plot-total-vs-year-line-and-point}
+ggplot(data = arbuthnot, aes(x = year, y = total)) +
+  geom_line() +
+  geom_point()
+```
+
+***do boys outnumber girls each year?***
+```{r boys-more-than-girls}
+arbuthnot <- arbuthnot %>%
+  mutate(more_boys = boys > girls)
+```
+///logical statements will give TRUE, FALSE statments
+  eg MORE_BOYS: logi TRUE TRUE ///
+  
+# finding the range of years
+***for dataset called "present"***
+range(present$year)
+
+
+***other notes***
+- [Data wrangling cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+    - [Data visualization cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/12/ggplot2-cheatsheet-2.0.pdf)
+    - [R Markdown](http://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
