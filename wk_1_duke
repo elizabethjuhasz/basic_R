@@ -54,3 +54,8 @@ ggplot(data = arbuthnot, aes(x = year, y = girls)) +
 
 ***plotting with ggplot help***
 http://docs.ggplot2.org/current/
+
+***total number of baptisms per year***
+```{r calc-total-bapt-vars}
+arbuthnot$boys + arbuthnot$girls
+```
