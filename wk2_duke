@@ -1,0 +1,27 @@
+### quick structure of the dataframe
+
+str(nycflights)
+
+### histogram
+
+ggplot(data = nycflights, aes(x = dep_delay)) +
+  geom_histogram()
+
+### bin width
+***size of bars***
+
+ggplot(data = nycflights, aes(x = dep_delay)) +
+  geom_histogram(binwidth = 15)
+ggplot(data = nycflights, aes(x = dep_delay)) +
+  geom_histogram(binwidth = 150)
+
+### new variable name
+***filtering destination to RDU***
+
+rdu_flights <- nycflights %>%
+  filter(dest == "RDU")
+
+***histogram of depature delays to RDU***
+ggplot(data = rdu_flights, aes(x = dep_delay)) +
+  geom_histogram()
+
