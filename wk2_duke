@@ -21,3 +21,16 @@ rdu_flights <- nycflights %>%
 ggplot(data = rdu_flights, aes(x = dep_delay)) +
   geom_histogram()
 
+### logical operators
+- `==` means "equal to"
+- `!=` means "not equal to"
+- `>` or `<` means "greater than" or "less than"
+- `>=` or `<=` means "greater than or equal to" or "less than or equal to"
+</div>
+
+### summary statistics for variables
+
+rdu_flights %>%
+  summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+  
+
