@@ -114,4 +114,6 @@ nycflights %>%
   summarise(median_dd = median(dep_delay)) %>%
   arrange(desc(median_dd))
 
+nycflights$av_speed <- nycflights$distance / nycflights$air_time_hr
+
 select(avg_speed, tailnum)
