@@ -96,6 +96,22 @@ This will give you the proportion.  The data is stored in a new variable 'ot_dep
 ggplot(data = nycflights, aes(x = origin, fill = dep_type)) +
   geom_bar()
 
-nycflights <- nycflights %>%
-  mutate(dep_type = ifelse(dep_delay < 5, "on time", "delayed"))
+***make a new variable with average speed to see average time traveled by each plane***
+the airtime variable values are by minutes
+I made a new variable in order to show hours
 
+nycflights <- nycflights %>%
+  mutate(air_time_hr = (air_time / 60))
+
+nycflights <- nycflights %>%
+  mutate(avg_speed = (distance / air_time_hr))
+
+nycflights %>%
+  group_by(tailnum) %>%
+  arrange(desc(avg_speed))
+  select(avg_speed, tailnum)
+  
+  summarise(median_dd = median(dep_delay)) %>%
+  arrange(desc(median_dd))
+
+select(avg_speed, tailnum)
