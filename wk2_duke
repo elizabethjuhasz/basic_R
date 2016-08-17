@@ -32,5 +32,68 @@ ggplot(data = rdu_flights, aes(x = dep_delay)) +
 
 rdu_flights %>%
   summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+
+- `mean`
+- `median`
+- `sd`
+- `var`
+- `IQR`
+- `range`
+- `min`
+- `max`
+
+***filtering variable with "and" = "," flights to SFO in Feb***
+sfo_feb_flights <- nycflights %>%
+  filter(dest == "SFO", month == 2)
+*** to filter with "or" in February we can use the `|` instead of the comma.
+
+### summary statistics for various groups
+rdu_flights %>%
+  group_by(origin) %>%
+  summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+***in the above you are filtering summary status for RDU flights to places of ORIGIN***
+
+***grouping flights to SFO, Feb, by carrier (arrival delays)***
+sfo_feb_flights %>%
+  group_by(carrier) %>%
+  summarise(median_ad = median(arr_delay), IQR_ad = IQR(arr_delay), n = n())
   
+***departure delays, median, by month.  Descending order***
+nycflights %>%
+  group_by(month) %>%
+  summarise(median_dd = median(dep_delay)) %>%
+  arrange(desc(median_dd))
+
+### box plots
+ggplot(nycflights, aes(x = factor(month), y = dep_delay)) +
+  geom_boxplot()
+
+### categorical variables on R
+***side-by-side box plots--need categorical variabl on x-axis.  In this data, month is a numerical variable.
+make the months into a categoical variable.
+in R it's called **factor** ***
+  `factor(month)`
+  
+***which of NYC's airports has the least dep. delays?***
+nycflights <- nycflights %>%
+  mutate(dep_type = ifelse(dep_delay < 5, "on time", "delayed"))
+
+dep_type is the name of the new variable created
+If less than five mins, it is "on time" if not, "delayed"
+overriding the NYC data to put in new variable name dep_type
+
+nycflights %>%
+  group_by(origin) %>%
+  summarise(ot_dep_rate = sum(dep_type == "on time") / n()) %>%
+  arrange(desc(ot_dep_rate))
+
+counting how many records of found group are on time. divide result by total number of elements found in group
+  n()) %>%
+This will give you the proportion.  The data is stored in a new variable 'ot_dep_rate'
+
+### segmented bar plot
+ggplot(data = nycflights, aes(x = origin, fill = dep_type)) +
+  geom_bar()
+
+
 
