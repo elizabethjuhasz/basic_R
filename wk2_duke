@@ -81,6 +81,7 @@ nycflights <- nycflights %>%
 dep_type is the name of the new variable created
 If less than five mins, it is "on time" if not, "delayed"
 overriding the NYC data to put in new variable name dep_type
+ifelse = if, else statement
 
 nycflights %>%
   group_by(origin) %>%
@@ -95,5 +96,6 @@ This will give you the proportion.  The data is stored in a new variable 'ot_dep
 ggplot(data = nycflights, aes(x = origin, fill = dep_type)) +
   geom_bar()
 
-
+nycflights <- nycflights %>%
+  mutate(dep_type = ifelse(dep_delay < 5, "on time", "delayed"))
 
