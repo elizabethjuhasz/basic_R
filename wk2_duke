@@ -117,3 +117,6 @@ nycflights %>%
 nycflights$av_speed <- nycflights$distance / nycflights$air_time_hr
 
 select(avg_speed, tailnum)
+
+nycflights <- nycflights %>%
+  mutate(arr_type = ifelse(arr_time <= 0, "on time", "delayed"))
