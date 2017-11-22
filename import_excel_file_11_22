@@ -1,0 +1,12 @@
+setwd("C:/Users/INSERTUSERNAME/Desktop")
+library(readxl)
+library(readr)
+library(plyr)
+
+Qualtrics_Survey <- read_csv("Qualtrics Survey.csv")
+# rename a variable (column)
+Qualtrics_Survey<-rename(Qualtrics_Survey, c(Q1="primary_role"))
+
+
+# delete a variable
+Qualtrics_Survey$primary_role<-NULL
